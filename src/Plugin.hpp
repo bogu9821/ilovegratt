@@ -5,6 +5,20 @@ namespace GOTHIC_NAMESPACE
 	// NOTE! Callbacks won't be called by default, you need to uncomment
 	// hooks that will call specific callback
 
+	void Print(const zSTRING& t_text)
+	{
+		ogame->GetTextView()->Printwin(t_text);
+	}
+
+	void __fastcall oCNpc__ProcessNpc_Hook(oCNpc* t_npc, void* t_register);
+	auto Hook_oCNpc__ProcessNpc = Union::CreateHook((void*)0x0073E480, &oCNpc__ProcessNpc_Hook, Union::HookType::Hook_CallPatch);
+	void __fastcall oCNpc__ProcessNpc_Hook(oCNpc* t_npc, void* t_register)
+	{
+		Print("I love gratt so much");
+		Hook_oCNpc__ProcessNpc(t_npc, t_register);
+		Print("<3");
+	}
+
 	void Game_EntryPoint()
 	{
 
